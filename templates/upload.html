@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Automated Image Describer</title>
+    <meta property="og:title" content="Medica template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+        integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <style data-tag="reset-style-sheet">
+      input[type="text"] {
+      background-color: white;
+    }
+
+    input[type="text"].filled,
+    input[type="text"]:focus {
+      background-color: black;
+      color: white;
+    }
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Poppins;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <style>
+      .left-aligned-heading {
+    text-align: left;
+    margin-left: 20px; /* Adjust the value as needed for the desired spacing */
+  }
+</style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <style>
+      @keyframes fade-in-left {
+        0% {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom fonts for this template -->
+    <!-- <link rel="stylesheet" href="/static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="/static/device-mockups/device-mockups.css">
+    <link href="/static/css/new-age.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="/static/css/new-age.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <div>
+      <script
+        type="text/javascript"
+        src="https://unpkg.com/dangerous-html@0.1.12/dist/default/lib.umd.js"
+      ></script>
+      <link href="/static/css/home.css" rel="stylesheet" />
+
+      <div class="home-container">
+        <div data-modal="practices" class="home-modal">
+          <div class="home-practices">
+            <div class="home-heading">
+              <span class="home-header">Our practices</span>
+              <svg
+                viewBox="0 0 1024 1024"
+                data-close="practices"
+                class="home-close"
+              >
+                <path
+                  d="M225.835 286.165l225.835 225.835-225.835 225.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l225.835-225.835 225.835 225.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-225.835-225.835 225.835-225.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-225.835 225.835-225.835-225.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"
+                ></path>
+              </svg>
+            </div>
+            <div class="home-grid">
+              <div class="home-section">
+                <div class="home-heading01">
+                  <span class="home-header01">Cardiology</span>
+                  <span class="home-caption">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </span>
+                </div>
+                <div class="read-more">
+                  <span class="home-text">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image"
+                  />
+                </div>
+              </div>
+              <div class="home-section1">
+                <div class="home-heading02">
+                  <span class="home-header02">Orthopedics</span>
+                  <span class="home-caption1">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </span>
+                </div>
+                <div class="read-more">
+                  <span class="home-text01">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image01"
+                  />
+                </div>
+              </div>
+              <div class="home-section2">
+                <div class="home-heading03">
+                  <span class="home-header03">Ophtalmology</span>
+                  <span class="home-caption2">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </span>
+                </div>
+                <div class="read-more">
+                  <span class="home-text02">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image02"
+                  />
+                </div>
+              </div>
+              <div class="home-section3">
+                <div class="home-heading04">
+                  <span class="home-header04">Pediatrics</span>
+                  <span class="home-caption3">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </span>
+                </div>
+                <div class="read-more">
+                  <span class="home-text03">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image03"
+                  />
+                </div>
+              </div>
+              <div class="home-section4">
+                <div class="home-heading05">
+                  <span class="home-header05">Nutrition</span>
+                  <span class="home-caption4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </span>
+                </div>
+                <div class="read-more">
+                  <span class="home-text04">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image04"
+                  />
+                </div>
+              </div>
+              <div class="home-section5">
+                <div class="home-heading06">
+                  <span class="home-header06">General</span>
+                  <span class="home-caption5">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt.
+                  </span>
+                </div>
+                <div class="read-more">
+                  <span class="home-text05">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image05"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="home-hero">
+          <header data-thq="thq-navbar" class="home-navbar">
+            <div class="home-left">
+              <!-- <h1 style="font-size: 32px; font-weight: bold; color: #ffd700; background-color: #000000; padding: 10px; border-radius: 8px;">
+    Automated Image Describer
+</h1> -->
+
+
+              <!-- <nav class="home-links">
+                <span class="home-link">
+                  <br />
+                  <br />
+                </span>
+                        
+                <a href="#upload" class="home-link01">Upload</a>
+                <a href="#how-it-works" class="home-link02">How it works</a>
+                <a href="#about-us" class="home-link03">About Us</a>
+              </nav> -->
+              <!-- <nav class="home-links">
+                  <style>
+                    .home-links {
+                      background-color: #0f0f0f;
+                      padding: 10px;
+                      border-radius: 8px;
+                    }
+                    
+                    .home-link01,
+                    .home-link02,
+                    .home-link03 {
+                      color: #ffd700;
+                      margin-right: 10px;
+                    }
+                  </style>
+                  
+                  <span class="home-link">
+                    <br />
+                    <br />
+                  </span>
+                  
+                  <a href="#upload" class="home-link01">Upload</a>
+                  <a href="#how-it-works" class="home-link02">How it works</a>
+                  <a href="#about-us" class="home-link03">About Us</a>
+                </nav> -->
+
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Automated Image Describer</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#how-it-works">How it works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about-us">About us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+            </div>
+            
+           
+            
+            
+          </header>
+          
+                <h1 class="home-header">
+          Let your computer say what happens in the image.
+        </h1>
+              
+
+
+          <div class="home-main"> 
+                       
+            <div id="upload" class="home-content">
+              <!-- <div class="left-aligned-heading">
+                <h1 class="home-header07">
+                    Let your computer say what happens in the image.
+                  </h1>
+              </div> -->
+
+              <!-- div class="image-container">
+                <img id="img-preview" src="default-image" alt="Image Preview">
+              </div> -->
+
+              
+                <!-- <div id="loading" style="text-align: center">
+                        <h6>Warning: This web app is experimental and still in development. Processing in neural network takes
+                            few seconds due to the limited computational capacity. </h6>
+                        <div id="loading-gif"></div>
+                        <p>Loading...</p>
+
+                    </div> -->
+                <!-- <h1 class="home-header07">
+                  Let your computer say what happens in the image.
+                </h1> -->
+                
+
+                  <!--  <h3>Upload Image</h3>
+                  <form method="post" enctype="multipart/form-data">
+                 <div class="form-group">
+                  <label for="content-file" class="custom-file-upload">
+                  <i class="fa fa-cloud-upload"></i> Select an image
+                  </label>
+                  <input type="file" id="content-file" name="content-file" style="display:none;"/>
+                  </div>
+                  <div class="form-group">
+                 <label for="image-url">Or enter an image URL:</label>
+                  <input type="text" class="form-control" id="image-url" name="image-url">
+                  </div>
+                  <button type="submit" class="button button-main home-book2" data-loading-text="Loading..." value="Upload" onclick="loading();">
+                    <span>Upload</span>
+                  </button>
+
+ 
+                    </form> -->
+                    
+                   <!--  <h1 class="home-header07">
+                  Let your computer say what happens in the image.
+                </h1>   -->
+
+                <!-- <div id="loading" style="text-align: left">
+                        <h6>Warning: This web app is experimental and still in development. Processing in neural network takes
+                            few seconds due to the limited computational capacity. </h6>
+                        <div id="loading-gif"></div>
+                        <p>Loading...</p>
+
+                    </div> -->
+
+                    <div id="loading" style="text-align: center; background-color: #f2f2f2; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+    <h6 style="font-weight: bold; color: #333333; font-size: 14px; margin-bottom: 10px;max-width: 500px;">
+        Warning: This web app is experimental and still in development. Processing in the neural network takes a few seconds due to the limited computational capacity.
+    </h6>
+    <div id="loading-gif">
+      <p>Loading...</p>
+    </div>
+</div>
+
+
+                    <div class="heading-container">
+                       <h2 class="heading">Image Preview</h2>
+                    </div>
+
+                    <div class="image-container">
+                      <img id="img-preview" class="no-preview-placeholder"></img>
+                    </div>
+                    <div class="upload-section">
+                      <h3 class="upload-heading">Upload Image</h3>
+                      <form method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                          <!-- <label for="content-file" class="custom-file-upload">
+                            <i class="fa fa-cloud-upload"></i> Select an image
+                          </label> -->
+                          <label for="content-file" class="custom-file-upload">
+  <i class="fas fa-cloud-upload-alt"></i> Select an Image
+</label>
+                          <input type="file" id="content-file" name="content-file" style="display:none;"/>
+                        </div>
+                        <div class="form-group">
+                          <label for="image-url">Or enter an image URL:</label>
+                          <input type="text" class="form-control" id="image-url" name="image-url">
+                        </div>
+                        <button type="submit" class="button button-main home-book2" data-loading-text="Loading..." value="Upload" onclick="loading();">
+                          <span>Upload</span>
+                        </button>
+                      </form>
+                    </div>
+                  
+              </div>
+              
+            </div>
+            <!-- <button class="home-book button button-main">
+                <img
+                  alt="image"
+                  src="public/playground_assets/calendar.svg"
+                  class="home-image07"
+                />
+                <span class="home-text09">Image Preview</span>
+              </button> -->
+            
+            
+            
+          </div>
+          <div class="home-background" style="display: grid; place-items: center;">
+            <!-- <div class="image-container">
+              <img id="img-preview" >
+            </div> -->
+
+
+            <div class="col-lg-5 my-auto ">
+                    <div class="device-container ">
+                        <div class="device-mockup iphone6_plus black">
+                            <div class="device ">
+                                <div class="screen ">
+                                    
+                                    
+                                    <video controls="controls" autoplay muted class="img-fluid" width="404" height="920">
+                                        <source src="/static/img/demo1.mp4">
+                                    </video>
+                                </div>
+                                <div class="button ">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+        </section>
+        
+        <!-- <section id="how-it-works" class="home-why">
+          <div class="home-heading08">
+            <h2 class="home-header08">Why choose us</h2>
+            <p class="home-header09">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt.
+            </p>
+          </div>
+          <div class="home-content1">
+              
+            
+            <div class="home-caption7">
+              <h3 class="home-header10">
+                Consectetur adipiscing elit, sed do eiusmod tempor
+              </h3>
+              <p class="home-header11">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt.
+              </p>
+            </div>
+          </div>
+        </section> -->
+
+
+        <section class="features" id="how-it-works" class="footer-section">
+        <div class="container">
+            <div class="section-heading text-center">
+                <!-- <h2>Unlimited Features, Unlimited Fun</h2> -->
+                <p class="text-muted">This project is an implementation of the paper below.</p>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 my-auto">
+                    <img src="/static/img/SA.jpeg" style="max-width: 100%;">
+                </div>
+                <div class="col-lg-6 my-auto">
+                    <div class="container-fluid">
+                        <a target=_blank href="https://docs.google.com/document/d/1dvFg9L2Q5tKRn2QmVQ4LlemSd1HV0-dD/edit?usp=sharing&ouid=102801249184700628760&rtpof=true&sd=true">
+                            <h3>Automated Image Describer</h3>
+                            <p class="text-muted">B Aditya Krishna, Ansh Sharma, Aman Anand</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+        <!-- <section class="how-it-works" >
+          <div class="home-heading09">
+            <h2 class="home-text16">Read our latest news</h2>
+            <p class="home-text17">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt.
+            </p>
+          </div>
+          <div class="home-list">
+            <div class="home-item">
+              <div class="home-image12">
+                <img
+                  alt="image"
+                  src="public/playground_assets/news-logo-1500w.png"
+                  class="home-image13"
+                />
+              </div>
+              <div class="home-content2">
+                <div class="home-details">
+                  <span class="home-date">November 23, 2022</span>
+                  <p class="home-quick-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                </div>
+                <div class="read-more">
+                  <span class="home-text18">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow.svg"
+                    class="home-image14"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="home-item1">
+              <div class="home-image15">
+                <img
+                  alt="image"
+                  src="public/playground_assets/news-1-1500w.png"
+                  class="home-image16"
+                />
+              </div>
+              <div class="home-content3">
+                <div class="home-details1">
+                  <span class="home-date1">November 23, 2022</span>
+                  <p class="home-quick-description1">
+                    Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+                </div>
+                <div class="read-more">
+                  <span class="home-text19">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image17"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="home-item2">
+              <div class="home-image18">
+                <img
+                  alt="image"
+                  src="public/playground_assets/news-2-1500w.png"
+                  class="home-image19"
+                />
+              </div>
+              <div class="home-content4">
+                <div class="home-details2">
+                  <span class="home-date2">November 23, 2022</span>
+                  <p class="home-quick-description2">
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore.
+                  </p>
+                </div>
+                <div class="read-more">
+                  <span class="home-text20">Read more</span>
+                  <img
+                    alt="image"
+                    src="public/playground_assets/arrow-2.svg"
+                    class="home-image20"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section> -->
+        <section class="how-it-works" class="footer-section">
+  <div class="home-heading09">
+    <h2 class="home-text16">Image Describer using LSTM and CNN</h2>
+    <p class="home-text17">
+       Describing image is a challenging task that combines computer vision and natural language processing techniques. In this project, we have trained our models using LSTM and CNN.
+    </p>
+  </div>
+  <div class="home-list">
+    <div class="home-item">
+      <div class="home-image12">
+        <img
+          alt="LSTM"
+          src="/static/img/paper.png"
+          class="home-image15"
+        />
+      </div>
+      <div class="home-content2">
+        <div class="home-details">
+          <!-- <span class="home-date">November 23, 2022</span> -->
+          <p class="home-quick-description">
+            LSTM (Long Short-Term Memory) is a type of recurrent neural network (RNN) architecture that is well-suited for sequence modeling tasks like language generation. Learn more about LSTM and its applications in image captioning .
+          </p>
+        </div>
+        <div class="read-more">
+          <span class="home-text18">
+            <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Read More</a></span>
+          <img
+            alt="Read more"
+            src="public/playground_assets/arrow.svg"
+            class="home-image14"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="home-item1">
+      <div class="home-image15">
+        <img
+          alt="CNN"
+          src="/static/img/cnn.png"
+          class="home-image16"
+        />
+      </div>
+      <div class="home-content3">
+        <div class="home-details1">
+          <!-- <span class="home-date1">November 23, 2022</span> -->
+          <p class="home-quick-description1">
+            CNN or the convolutional neural network (CNN) is a class of deep learning neural networks. In short think of CNN as a machine learning algorithm that can take in an input image, assign importance (learnable weights and biases) to various aspects/objects in the image, and be able to differentiate one from the other.
+          </p>
+        </div>
+        <div class="read-more">
+          <span class="home-text19">
+            <a href="https://www.analyticsvidhya.com/blog/2020/02/learn-image-classification-cnn-convolutional-neural-networks-3-datasets/">Read More</a>.
+          
+          </span>
+          <img
+            alt="Read more"
+            src="public/playground_assets/arrow-2.svg"
+            class="home-image17"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="home-item2">
+      <div class="home-image18">
+        <img
+          alt="Project Result"
+          src="/static/img/result1.png"
+          class="home-image18"
+        />
+      </div>
+      <div class="home-content4">
+        <div class="home-details2">
+          <!-- <span class="home-date2">November 23, 2022</span> -->
+          <p class="home-quick-description2">
+            We have trained our models on a large dataset and achieved impressive results. View some of the results <a href="https://docs.google.com/document/d/1jCQgUlxAcKUtd06AQZHNCnD6N_PfdeUz/edit?rtpof=true&sd=true">here
+              </a>.
+            </p>
+            </div>
+            <div class="read-more">
+             <span class="home-text20">
+                <a href="https://docs.google.com/document/d/1jCQgUlxAcKUtd06AQZHNCnD6N_PfdeUz/edit?rtpof=true&sd=true">
+            Read more</a>
+            </span>
+            <img
+                     alt="Read more"
+                     src="public/playground_assets/arrow-2.svg"
+                     class="home-image20"
+                   />
+            </div>
+            </div>
+            </div>
+
+              </div>
+            </section>
+
+        <!-- <div class="home-download"></div> -->
+        <!-- <div id="about-us" class="home-footer"> -->
+          <!-- <div class="home-left1">
+            <div class="home-brand">
+              <img
+                alt="image"
+                src="public/playground_assets/logo-2.svg"
+                class="home-image21"
+              />
+              <p class="home-text21">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt.
+              </p>
+            </div>
+            <div class="home-socials">
+              <div class="social">
+                <img
+                  alt="image"
+                  src="public/playground_assets/insider.svg"
+                  class="home-image22"
+                />
+              </div>
+              <div class="social">
+                <img
+                  alt="image"
+                  src="public/playground_assets/instagram.svg"
+                  class="home-image23"
+                />
+              </div>
+              <div class="social">
+                <img
+                  alt="image"
+                  src="public/playground_assets/twitter.svg"
+                  class="home-image24"
+                />
+              </div>
+            </div>
+            <div class="home-legal">
+              <span class="home-copyright">
+                © 2022 finbest. All Rights Reserved.
+              </span>
+              <span class="legal-link">Privacy Policy</span>
+              <span class="legal-link">Terms of Use</span>
+            </div>
+          </div> -->
+
+          <!-- <div class="home-right1">
+            <div class="home-list1">
+              <span class="home-header12">Menu</span>
+              <div class="home-links1">
+                <span class="home-link04">Home</span>
+                <span class="home-link05">About</span>
+                <span class="home-link06">Services</span>
+                <span class="home-link07">Blog</span>
+                <span class="home-link08">Support</span>
+              </div>
+            </div>
+            <div class="home-list2">
+              <span class="home-header13">Resources</span>
+              <div class="home-links2">
+                <span class="home-link09">Test Results</span>
+                <span class="home-link10">Patients</span>
+                <span class="home-link11">Doctors</span>
+                <span class="home-link12">Health</span>
+              </div>
+            </div>
+            <div class="home-list3">
+              <span class="home-header14">Contact</span>
+              <div class="home-links3">
+                <span class="home-link13">
+                  24 Street Name, City FI 01234, RO
+                </span>
+                <a
+                  href="mailto:contact@template.new?subject=Main"
+                  class="home-link14"
+                >
+                  contact@template.new
+                </a>
+                <a href="tel:(004) 234 - 5678" class="home-link15">
+                  (004) 234 - 5678
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="home-legal1">
+            <div class="home-row">
+              <span class="legal-link">Privacy Policy</span>
+              <span class="legal-link">Terms of Use</span>
+            </div>
+            <span class="home-copyright5">
+              © 2022 finbest. All Rights Reserved.
+            </span>
+          </div> -->
+          <section class="footer-section">
+          <footer class="footer" id="about-us">
+    <div class="footer-heading">Automated Image Describer using machine learning</div>
+    <div class="footer-description">Capstone Project - VIT University</div>
+    <div class="footer-developers">
+      Developed by:<br>
+      <span class="footer-name">B. Aditya Krishna</span> |
+      <a class="footer-link" href="https://github.com/adityakrishna01/"><i class="fab fa-github"></i></a> |
+      <a class="footer-link" href="https://www.linkedin.com/in/b-aditya-krishna-559878206/"><i class="fab fa-linkedin"></i></a>
+      <br>
+      <span class="footer-name">Aman Anand</span> |
+      <a class="footer-link" href="https://github.com/amananandx"><i class="fab fa-github"></i></a> |
+      <a class="footer-link" href="https://www.linkedin.com/in/aman-anand748/"><i class="fab fa-linkedin"></i></a>
+      <br>
+      <span class="footer-name">Ansh Sharma</span> |
+      <a class="footer-link" href="https://github.com/anshsharma43"><i class="fab fa-github"></i></a> |
+      <a class="footer-link" href="https://www.linkedin.com/in/ansh-sharma-here/"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div class="footer-social">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <span class="home-copyright5">
+              © 2023 All Rights Reserved.
+            </span>
+  </footer>
+</section>
+
+
+        <!-- </div> -->
+        <!-- <div> -->
+          <dangerous-html
+            html="<script>
+const modalOpen = document.querySelectorAll('[data-open]');
+const modalClose = document.querySelectorAll('[data-close]');
+
+modalOpen.forEach(button => {
+    button.addEventListener('click', event => {
+        const modal = document.querySelector(`[data-modal='${event.target.dataset.open}']`);
+        modal.style.display = 'flex';
+    });
+});
+
+modalClose.forEach(button => {
+    button.addEventListener('click', event => {
+        const modal = document.querySelector(`[data-modal='${event.target.dataset.close}']`);
+        modal.style.display = 'none';
+    });
+});
+</script>
+"
+          ></dangerous-html>
+        </div>
+        <div>
+          <dangerous-html
+            html="<script>
+const dataLetters = document.querySelectorAll('[data-letter]');
+let activeLetters = [];
+const maxResults = 6;
+
+dataLetters.forEach(letter => {
+  letter.addEventListener('click', function() {
+    if (this.classList.contains('letter-active')) {
+      this.classList.remove('letter-active');
+      activeLetters = activeLetters.filter(a => a !== this.dataset.letter);
+    } else {
+      this.classList.add('letter-active');
+      activeLetters.push(this.dataset.letter);
+    }
+    if (activeLetters.length == 0) {
+      document.querySelector('[data-teleport='results']').style.display = 'none';
+      return;
+    }
+    showResults();
+  });
+});
+
+const showResults = () => {
+  fetch('https://raw.githubusercontent.com/Shivanshu-Gupta/web-scrapers/master/medical_ner/medicinenet-diseases.json')
+    .then(response => response.json())
+    .then(data => {
+      const filteredData = data.filter(item => {
+        const firstLetter = item.disease.charAt(0).toLowerCase();
+        if (activeLetters.includes(firstLetter)) {
+          return true;
+        }
+        return false;
+      });
+
+      document.querySelector('[data-teleport='results']').style.display = 'flex';
+      const resultsContainer = document.querySelector('[data-results='letters']');
+      resultsContainer.innerHTML = '';
+
+      let counter = 0;
+      const diseaseGroups = {};
+      const totalActiveLetters = activeLetters.length;
+
+      filteredData.forEach(disease => {
+        const firstLetter = disease.disease[0].toLowerCase();
+        if (diseaseGroups[firstLetter]) {
+          diseaseGroups[firstLetter].push(disease);
+        } else {
+          diseaseGroups[firstLetter] = [disease];
+        }
+      });
+
+      Object.keys(diseaseGroups).sort().forEach((firstLetter, index) => {
+        const diseasesForThisLetter = diseaseGroups[firstLetter];
+        const diseasesToShow = diseasesForThisLetter.slice(0, Math.ceil(maxResults / totalActiveLetters));
+
+        diseasesToShow.forEach(disease => {
+          const resultContainer = document.createElement('div');
+          resultContainer.classList.add('search-result');
+          resultContainer.classList.add('invisible');
+          resultContainer.style.animationDelay = `${counter * 0.25}s`;
+
+          const resultText = document.createElement('span');
+          resultText.classList.add('result-text');
+          resultText.textContent = disease.disease;
+
+          resultContainer.appendChild(resultText);
+          resultsContainer.appendChild(resultContainer);
+          counter++;
+
+          if (counter === maxResults) {
+            const moreContainer = document.createElement('div');
+            moreContainer.classList.add('search-result');
+            moreContainer.classList.add('more-results');
+
+            const moreText = document.createElement('span');
+            moreText.classList.add('result-text');
+            moreText.textContent = 'More';
+
+            moreContainer.appendChild(moreText);
+            resultsContainer.appendChild(moreContainer);
+            addedMoreContainer = true;
+            return;
+          }
+        });
+      });
+    });
+};
+</script>
+"
+          ></dangerous-html>
+        </div>
+        <div>
+          <dangerous-html
+            html="<script>
+function scroll(direction) {
+  const doctorsDiv = document.querySelector('[data-teleport='doctors']');
+  const scrollAmount = 300;
+  if (direction === 'previous') {
+    doctorsDiv.scrollBy({
+      left: -scrollAmount,
+      behavior: 'smooth'
+    });
+  } else if (direction === 'next') {
+    doctorsDiv.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+}
+
+const buttons = document.querySelectorAll('[data-doctors]');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const direction = button.dataset.doctors;
+    scroll(direction);
+  });
+});
+</script>"
+          ></dangerous-html>
+        </div>
+      </div>
+    </div>
+    <script
+      data-section-id="navbar"
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+<script src="/static/vendor/jquery/jquery.min.js "></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js "></script>
+    
+    <!-- Custom scripts for this template -->
+    <script src="/static/js/new-age.min.js "></script>
+
+    <script type="text/javascript">// <![CDATA[
+        function loading() {
+            $("#loading").show();
+            $("#loading-gif").show();
+            $("#content").hide();
+        }
+    // ]]></script>
+    <script>
+
+     var input = document.getElementById('image-url');
+
+    input.addEventListener('input', function() {
+      if (input.value.trim() !== '') {
+        input.classList.add('filled');
+      } else {
+        input.classList.remove('filled');
+      }
+    });
+
+    input.addEventListener('focus', function() {
+      input.classList.add('filled');
+    });
+
+    input.addEventListener('blur', function() {
+      if (input.value.trim() === '') {
+        input.classList.remove('filled');
+      }
+    }); 
+        const form = document.querySelector('#caption-form');
+    const imagePreview = document.querySelector('#img-preview');
+    const caption = document.querySelector('#caption');
+    const errorMessage = document.querySelector('#error-message');
+    const successMessage = document.querySelector('#success-message');
+                document.addEventListener('DOMContentLoaded', function() {
+  previewImage();
+});
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorMessage.innerText = '';
+      successMessage.innerText = '';
+      caption.innerText = 'Generating caption...';
+
+      const formData = new FormData();
+      formData.append('image', imagePreview.src);
+
+      fetch('/generate-caption', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          caption.innerText = '';
+          errorMessage.innerText = data.error;
+        } else {
+          caption.innerHTML = '<span>Generated Caption:</span> ' + data.caption;
+          successMessage.innerText = 'Caption generated successfully!';
+        }
+      })
+      .catch(error => {
+        caption.innerText = '';
+        errorMessage.innerText = 'An error occurred while generating caption. Please try again later.';
+      });
+    });
+    
+  function previewImage() {
+  const fileInput = document.getElementById('content-file');
+  const urlInput = document.getElementById('image-url');
+  const previewImg = document.getElementById('img-preview');
+
+  
+  fileInput.addEventListener('change', function() {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    reader.addEventListener('load', function() {
+      previewImg.src = reader.result;
+      
+    });
+    
+    reader.readAsDataURL(file);
+  });
+  
+  urlInput.addEventListener('input', function() {
+    previewImg.src = urlInput.value;
+
+  });
+}
+        
+    </script>
+
+  </body>
+</html>
